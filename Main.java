@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        var inicio = System.currentTimeMillis();
+        var start = System.currentTimeMillis();
         int num = 29;
         boolean isPrime = true;
 
@@ -15,8 +15,8 @@ public class Main {
             System.out.println(num + " es un número primo");
         else
             System.out.println(num + " no es un número primo");
-        var fin = System.currentTimeMillis();
-        var result = fin - inicio;
+        var end = System.currentTimeMillis();
+        var result = end - start;
         System.out.println("El tiempo ha sido: " + result + "ms");
     }
 }
