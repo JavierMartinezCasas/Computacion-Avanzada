@@ -1,9 +1,11 @@
+package Parte1;
+
 import java.math.BigInteger;
 
 public class Main {
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
-        String num_str = "7777777777888888888888888888";
+        String num_str = "3045006047";
 
         BigInteger num = new BigInteger(num_str);
         boolean isPrime = true;
