@@ -1,11 +1,16 @@
+import java.math.BigInteger;
+
 public class Main {
     public static void main(String[] args) {
-        var start = System.currentTimeMillis();
-        int num = 29;
+        long start = System.currentTimeMillis();
+        String num_str = "7777777777888888888888888888";
+
+        BigInteger num = new BigInteger(num_str);
         boolean isPrime = true;
 
-        for(int i=2; i<=num/2; i++) {
-            if(num % i == 0) {
+        BigInteger limit = num.divide(BigInteger.valueOf(2));
+        for(BigInteger i = BigInteger.TWO; i.compareTo(limit) <= 0; i = i.add(BigInteger.ONE)) {
+            if(num.mod(i).equals(BigInteger.ZERO)) {
                 isPrime = false;
                 break;
             }
@@ -14,9 +19,9 @@ public class Main {
         if(isPrime)
             System.out.println(num + " es un número primo");
         else
-            System.out.println(num + " no es un número primo");
-        var end = System.currentTimeMillis();
-        var result = end - start;
+            System.out.println(num + " es un número compuesto");
+        long end = System.currentTimeMillis();
+        long result = end - start;
         System.out.println("El tiempo ha sido: " + result + "ms");
     }
 }
