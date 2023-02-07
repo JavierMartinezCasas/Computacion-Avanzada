@@ -43,8 +43,6 @@ public class Main {
             }
         }
 
-        var end = System.currentTimeMillis();
-        var result = end - start;
         System.out.println("La lista de divisores del primer numero es: " + facts1);
         System.out.println("La lista de divisores del segundo  numero es: " + facts2);
 
@@ -69,6 +67,9 @@ public class Main {
         for (i=0; i<common.size(); i++) {
             numResult *= common.get(i);
         }
+
+        var end = System.currentTimeMillis();
+        var result = end - start;
 
         System.out.println("La lista resultado es: " + common);
         System.out.println("El mcd es: " + numResult);
