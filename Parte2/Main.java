@@ -16,30 +16,30 @@ public class Main {
         ArrayList<Integer> facts2 = new ArrayList<Integer>();
 
         // BUCLE ARRAY 1
-        var div1 = 2;
+        var div = 2;
         var stop = true;
         while (stop) {
-            if (num_max / 2 <= div1) {    // Se ha llegado a la mitad del numero entrada
+            if (num_max / 2 <= div) {    // Se ha llegado a la mitad del numero entrada
                 stop = false;
-            } else if (num % div1 == 0) {
-                facts1.add(div1);
-                num = num / div1;
-            } else if (num % div1 != 0) {
-                div1++;
+            } else if (num % div == 0) {
+                facts1.add(div);
+                num = num / div;
+            } else if (num % div != 0) {
+                div++;
             }
         }
 
         // BUCLE ARRAY 2
-        var div2 = 2;
-        var stop2 = true;
-        while (stop2) {
-            if (num_max2 / 2 <= div2) {    // Se ha llegado a la mitad del numero entrada
-                stop2 = false;
-            } else if (num2 % div2 == 0) {
-                facts2.add(div2);
-                num2 = num2 / div2;
-            } else if (num2 % div2 != 0) {
-                div2++;
+        div = 2;
+        stop = false;
+        while (stop) {
+            if (num_max2 / 2 <= div) {    // Se ha llegado a la mitad del numero entrada
+                stop = false;
+            } else if (num2 % div == 0) {
+                facts2.add(div);
+                num2 = num2 / div;
+            } else if (num2 % div != 0) {
+                div++;
             }
         }
 
@@ -47,9 +47,9 @@ public class Main {
         System.out.println("La lista de divisores del segundo  numero es: " + facts2);
 
         ArrayList<Integer> common = new ArrayList<Integer>();
-        var stop3 = true;
+        stop = false;
         var i = 0;
-        while (stop3){
+        while (stop){
              var x = facts1.get(i);
              if (facts2.contains(x)) {
                  common.add(x);
@@ -59,7 +59,7 @@ public class Main {
                  i++;
              }
              if (i==facts1.size()) {
-                 stop3 = false;
+                 stop = false;
              }
         }
 
