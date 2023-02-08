@@ -22,4 +22,3 @@ public class Main_euclides {
         System.out.println("El tiempo ha sido: " + result + "ms"); // 1
     }
 }
-
