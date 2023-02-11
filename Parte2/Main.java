@@ -11,14 +11,18 @@ public class Main {
         ArrayList<Long> times = new ArrayList<Long>();
         int num = 21;
         int num2 = 34;
+
         for (int j=0; j<4; j++) {
             var start = System.nanoTime();
+
             int num_max = num;
             int num_max2 = num2;
 
-
             ArrayList<Integer> facts1 = new ArrayList<Integer>();
             ArrayList<Integer> facts2 = new ArrayList<Integer>();
+
+            facts1.add(1);
+            facts2.add(1);
 
             input1.add(num);
             input2.add(num2);
@@ -40,7 +44,7 @@ public class Main {
             // BUCLE ARRAY 2
             div = 2;
             stop = true;
-            while (stop) {
+            while (stop){
                 if (num_max2 / 2 <= div) {    // Se ha llegado a la mitad del numero entrada
                     stop = false;
                 } else if (num2 % div == 0) {
@@ -77,8 +81,8 @@ public class Main {
             output.add(numResult);
 
 
-            int sum = num + num2;
-            num = num2;
+            int sum = num_max + num_max2;
+            num = num_max2;
             num2 = sum;
 
             var end = System.nanoTime();
