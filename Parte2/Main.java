@@ -12,7 +12,7 @@ public class Main {
         int num = 377;
         int num2 = 610;
 
-        for (int j=0; j<20; j++) {
+        for (int j=0; j<32; j++) {
             var start = System.nanoTime();
 
             int num_max = num;
@@ -23,6 +23,8 @@ public class Main {
 
             facts1.add(1);
             facts2.add(1);
+            facts1.add(num);
+            facts2.add(num2);
 
             input1.add(num);
             input2.add(num2);
@@ -90,6 +92,6 @@ public class Main {
             times.add(result);
 
         }
-        System.out.println("El tiempo ha sido: " + times + "ns de: " + input1 + " " + input2);
+        System.out.println("El tiempo ha sido: \n" + times + "ns de: \n" + input1 + " \n" + input2);
     }
 }
