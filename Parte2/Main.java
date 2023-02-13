@@ -9,10 +9,10 @@ public class Main {
 
         ArrayList<Integer> output = new ArrayList<Integer>();
         ArrayList<Long> times = new ArrayList<Long>();
-        int num = 21;
-        int num2 = 34;
+        int num = 377;
+        int num2 = 610;
 
-        for (int j=0; j<4; j++) {
+        for (int j=0; j<20; j++) {
             var start = System.nanoTime();
 
             int num_max = num;
