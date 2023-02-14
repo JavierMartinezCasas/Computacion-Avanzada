@@ -62,9 +62,11 @@ public class Main {
 
             stop = true;
             var i = 0;
+            var numResult = 1;
             while (stop) {
                 var x = facts1.get(i);
                 if (facts2.contains(x)) {
+                    numResult *= x;
                     common.add(x);
                     facts1.remove(i);
                     facts2.remove((Integer) x);
@@ -76,10 +78,6 @@ public class Main {
                 }
             }
 
-            var numResult = 1;
-            for (i = 0; i < common.size(); i++) {
-                numResult *= common.get(i);
-            }
             output.add(numResult);
 
 
