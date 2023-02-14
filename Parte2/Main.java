@@ -32,7 +32,7 @@ public class Main {
             // BUCLE ARRAY 1
             var div = 2;
             var stop = true;
-            while (stop) {
+            while (stop) { // 1  + n (13)
                 if (num_max / 2 <= div) {    // Se ha llegado a la mitad del numero entrada
                     stop = false;
                 } else if (num % div == 0) {
@@ -63,7 +63,7 @@ public class Main {
             stop = true;
             var i = 0;
             var numResult = 1;
-            while (stop) {
+            while (stop) {  // 1 + n(13)
                 var x = facts1.get(i);
                 if (facts2.contains(x)) {
                     numResult *= x;
