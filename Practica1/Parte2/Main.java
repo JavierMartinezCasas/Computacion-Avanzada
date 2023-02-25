@@ -1,6 +1,5 @@
-package Parte2;
+package Practica1.Parte2;
 import java.util.ArrayList;
-import java.math.BigInteger;
 
 public class Main {
     public static void main(String[] args) {

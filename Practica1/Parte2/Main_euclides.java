@@ -1,4 +1,4 @@
-package Parte2;
+package Practica1.Parte2;
 
 import java.util.ArrayList;
 

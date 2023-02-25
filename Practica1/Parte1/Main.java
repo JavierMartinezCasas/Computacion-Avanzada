@@ -1,4 +1,4 @@
-package Parte1;
+package Practica1.Parte1;
 
 import java.math.BigInteger;
 

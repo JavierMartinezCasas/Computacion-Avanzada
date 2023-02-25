@@ -1,4 +1,4 @@
-package Parte1;
+package Practica1.Parte1;
 
 public class Main_malo {
     public static void main(String[] args) {
