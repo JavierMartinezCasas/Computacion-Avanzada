@@ -11,12 +11,15 @@ public class Scratch {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		long start = System.currentTimeMillis(); // 1
+		BigInteger n = new BigInteger("98982601");
+		System.out.println(n);
+		AKS.verbose = true;
 
-		//BigInteger n = BigInteger.probablePrime(24, new SecureRandom()); // 2^bitLength
-		BigInteger n = BigInteger.valueOf(2); // Meter el numero ahi
-		System.out.println("Numero: " + n);
-		AKS.verbose = false;
-		System.out.println(new AKS(n).isPrime());
+		new AKS(n).isPrime();
+		long end = System.currentTimeMillis();
+		long result = end - start;
+		System.out.println("Resultado tiempo: " + result);
 	}
 
 }
