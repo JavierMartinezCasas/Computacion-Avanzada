@@ -63,9 +63,11 @@ public class AKS extends Thread
 		// If ( n = a^b for a in natural numbers and b > 1), output COMPOSITE
 		BigInteger base = BigInteger.valueOf(2);
 		BigInteger aSquared;
-		
+
+		long start = System.currentTimeMillis();
 		do
 		{
+
 			BigInteger result;
 
 			int power = Math.max((int) (log()/log(base) - 2),1);
@@ -84,7 +86,7 @@ public class AKS extends Thread
 				if (verbose) System.out.println(n + " is a perfect power of " + base);
 				factor = base;
 				n_isprime = false;
-				return n_isprime;
+				return false;
 			}
 			
 			if (verbose) System.out.println(n + " is not a perfect power of " + base);
@@ -93,6 +95,10 @@ public class AKS extends Thread
 			aSquared = base.pow(2);
 		}
 		while (aSquared.compareTo(this.n) <= 0);
+		long end = System.currentTimeMillis();
+		long resultTime = end - start;
+		System.out.println("\nEl resultado en tiempo es: " + resultTime + " ms.");
+
 		if (verbose) System.out.println(n + " is not a perfect power of any integer less than its square root");
 		
 

@@ -125,7 +125,7 @@ public class Interface {
       {
         VerbosePrint("AKS says " + this.toTest.toString() + " is " + AKSThread.n_isprime);
         m_isprime = AKSThread.n_isprime;
-        MRThread.stop();
+        MRThread.interrupt();
         return m_isprime;
         //break;
       }
@@ -134,7 +134,7 @@ public class Interface {
         VerbosePrint("MR says " + this.toTest.toString() + " is " + MRThread.GetIsPrime());
         m_isprime = MRThread.GetIsPrime();
         //if(!MRThread.GetIsPrime())
-        AKSThread.stop();
+        AKSThread.interrupt();
         return m_isprime;
         //mraliveprint = true;
         //break;
