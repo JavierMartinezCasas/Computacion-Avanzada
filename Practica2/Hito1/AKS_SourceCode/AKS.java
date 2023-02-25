@@ -86,6 +86,10 @@ public class AKS extends Thread
 				if (verbose) System.out.println(n + " is a perfect power of " + base);
 				factor = base;
 				n_isprime = false;
+
+				long end = System.currentTimeMillis();
+				long resultTime = end - start;
+				System.out.println("\nEl resultado en tiempo es: " + resultTime + " ms.");
 				return false;
 			}
 			
