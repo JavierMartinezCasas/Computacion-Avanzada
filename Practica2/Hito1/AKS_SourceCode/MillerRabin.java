@@ -1,3 +1,5 @@
+package Practica2.Hito1.AKS_SourceCode;
+
 import java.math.BigInteger;
 import java.util.Random;
 import java.lang.Thread;
@@ -25,8 +27,8 @@ public class MillerRabin extends Thread {
   //taken from:
   /*
    * Miller-Rabin wikipedia
-   * Pomerance, C.; Selfridge, J. L. & Wagstaff, S. S., Jr. (1980), "The pseudoprimes to 25á109", Mathematics of Computation 35 (151): 1003Ð1026, doi:10.2307/2006210
-   * Jaeschke, Gerhard (1993), "On strong pseudoprimes to several bases", Mathematics of Computation 61 (204): 915Ð926, doi:10.2307/2153262
+   * Pomerance, C.; Selfridge, J. L. & Wagstaff, S. S., Jr. (1980), "The pseudoprimes to 25ï¿½109", Mathematics of Computation 35 (151): 1003ï¿½1026, doi:10.2307/2006210
+   * Jaeschke, Gerhard (1993), "On strong pseudoprimes to several bases", Mathematics of Computation 61 (204): 915ï¿½926, doi:10.2307/2153262
    */
   private final BigInteger FASTMAX = new BigInteger("341550071728321");
 	
