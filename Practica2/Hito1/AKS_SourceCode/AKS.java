@@ -64,7 +64,7 @@ public class AKS extends Thread
 		BigInteger base = BigInteger.valueOf(2);
 		BigInteger aSquared;
 
-		long start = System.currentTimeMillis();
+		// long start = System.currentTimeMillis();
 		do
 		{
 
@@ -87,9 +87,9 @@ public class AKS extends Thread
 				factor = base;
 				n_isprime = false;
 
-				long end = System.currentTimeMillis();
+				/*long end = System.currentTimeMillis();
 				long resultTime = end - start;
-				System.out.println("\nEl resultado en tiempo es: " + resultTime + " ms.");
+				System.out.println("\nEl resultado en tiempo es: " + resultTime + " ms.");*/
 				return false;
 			}
 			
@@ -99,9 +99,6 @@ public class AKS extends Thread
 			aSquared = base.pow(2);
 		}
 		while (aSquared.compareTo(this.n) <= 0);
-		long end = System.currentTimeMillis();
-		long resultTime = end - start;
-		System.out.println("\nEl resultado en tiempo es: " + resultTime + " ms.");
 
 		if (verbose) System.out.println(n + " is not a perfect power of any integer less than its square root");
 		
@@ -110,6 +107,8 @@ public class AKS extends Thread
 		// o_r(n) is the multiplicative order of n modulo r
 		// the multiplicative order of n modulo r is the 
 		// smallest positive integer k with	n^k = 1 (mod r).
+		long start = System.currentTimeMillis();
+
 		double log = this.log();
 		double logSquared = log*log;
 		BigInteger k = BigInteger.ONE;
@@ -123,6 +122,11 @@ public class AKS extends Thread
 		while( k.doubleValue() < logSquared );
 		if (verbose) System.out.println("r is " + r);
 
+		long end = System.currentTimeMillis();
+		long resultTime = end - start;
+		System.out.println("\nEl resultado del Paso 2 en tiempo es: " + resultTime + " ms.");
+
+		start = System.currentTimeMillis();
 		
 		// If 1 < gcd(a,n) < n for some a <= r, output COMPOSITE
 		for( BigInteger i = BigInteger.valueOf(2); i.compareTo(r) <= 0; i = i.add(BigInteger.ONE) )
@@ -136,8 +140,11 @@ public class AKS extends Thread
 				return false;
 			}
 		}
-		
-		
+
+		end = System.currentTimeMillis();
+		resultTime = end - start;
+		System.out.println("\nEl resultado del Paso 3 en tiempo es: " + resultTime + " ms.");
+
 		// If n <= r, output PRIME
 		if( n.compareTo(r) <= 0 )
 		{
