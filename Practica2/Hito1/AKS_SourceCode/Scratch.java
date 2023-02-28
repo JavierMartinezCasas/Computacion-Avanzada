@@ -13,6 +13,7 @@ public class Scratch {
 		// TODO Auto-generated method stub
 
 		BigInteger n = new BigInteger("98982599");
+		// BigInteger n = BigInteger.probablePrime(64, new SecureRandom());
 		System.out.println(n);
 		AKS.verbose = false;
 

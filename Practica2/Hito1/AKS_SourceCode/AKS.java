@@ -2,7 +2,9 @@ package Practica2.Hito1.AKS_SourceCode;
 
 import java.math.BigInteger;
 import java.lang.Thread;
-
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * 
@@ -64,7 +66,7 @@ public class AKS extends Thread
 		BigInteger base = BigInteger.valueOf(2);
 		BigInteger aSquared;
 
-		// long start = System.currentTimeMillis();
+		long start = System.currentTimeMillis();
 		do
 		{
 
@@ -87,9 +89,9 @@ public class AKS extends Thread
 				factor = base;
 				n_isprime = false;
 
-				/*long end = System.currentTimeMillis();
+				long end = System.currentTimeMillis();
 				long resultTime = end - start;
-				System.out.println("\nEl resultado en tiempo es: " + resultTime + " ms.");*/
+				System.out.println("\nEl resultado en tiempo es: " + resultTime + " ms.");
 				return false;
 			}
 			
@@ -99,15 +101,23 @@ public class AKS extends Thread
 			aSquared = base.pow(2);
 		}
 		while (aSquared.compareTo(this.n) <= 0);
-
+		long end = System.currentTimeMillis();
+		long resultTime = end - start;
+		try {
+			FileWriter archivo = new FileWriter("pruebas.txt", true);
+			archivo.write("\nEl resultado del Paso 1 en tiempo es: " + resultTime + " ms para el número: " + n);
+			archivo.close();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 		if (verbose) System.out.println(n + " is not a perfect power of any integer less than its square root");
-		
+
 
 		// Find the smallest r such that o_r(n) > log^2 n
 		// o_r(n) is the multiplicative order of n modulo r
 		// the multiplicative order of n modulo r is the 
 		// smallest positive integer k with	n^k = 1 (mod r).
-		long start = System.currentTimeMillis();
+		start = System.currentTimeMillis();
 
 		double log = this.log();
 		double logSquared = log*log;
@@ -122,10 +132,16 @@ public class AKS extends Thread
 		while( k.doubleValue() < logSquared );
 		if (verbose) System.out.println("r is " + r);
 
-		long end = System.currentTimeMillis();
-		long resultTime = end - start;
+		end = System.currentTimeMillis();
+		resultTime = end - start;
 		System.out.println("\nEl resultado del Paso 2 en tiempo es: " + resultTime + " ms.");
-
+		try {
+			FileWriter archivo = new FileWriter("pruebas.txt", true);
+			archivo.write("\nEl resultado del Paso 2 en tiempo es: " + resultTime + " ms para el número: " + n);
+			archivo.close();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 		start = System.currentTimeMillis();
 		
 		// If 1 < gcd(a,n) < n for some a <= r, output COMPOSITE
@@ -144,7 +160,13 @@ public class AKS extends Thread
 		end = System.currentTimeMillis();
 		resultTime = end - start;
 		System.out.println("\nEl resultado del Paso 3 en tiempo es: " + resultTime + " ms.");
-
+		try {
+			FileWriter archivo = new FileWriter("pruebas.txt", true);
+			archivo.write("\nEl resultado del Paso 3 en tiempo es: " + resultTime + " ms para el número: " + n);
+			archivo.close();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 		// If n <= r, output PRIME
 		if( n.compareTo(r) <= 0 )
 		{
@@ -155,7 +177,7 @@ public class AKS extends Thread
 		
 		// For i = 1 to sqrt(totient)log(n) do
 		// if (X+i)^n <> X^n + i (mod X^r - 1,n), output composite;
-
+		start = System.currentTimeMillis();
 		// sqrt(totient)log(n)
 		int limit = (int) (Math.sqrt(totient(r).doubleValue()) * this.log());
 		// X^r - 1
@@ -180,7 +202,15 @@ public class AKS extends Thread
 			else
 				if (verbose) System.out.println("(x+" + i + ")^" + n + " = x^" + n + " + " + i + " mod (x^" + r + " - 1, " + n + ") true");
 		}
-		
+		end = System.currentTimeMillis();
+		resultTime = end - start;
+		try {
+			FileWriter archivo = new FileWriter("pruebas.txt", true);
+			archivo.write("\nEl resultado del Paso 5 en tiempo es: " + resultTime + " ms para el número: " + n+"\n\n");
+			archivo.close();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 		n_isprime = true;
 	    return n_isprime;
 	}
