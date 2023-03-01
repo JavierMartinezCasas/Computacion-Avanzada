@@ -67,7 +67,6 @@ public class AKS extends Thread
 		BigInteger aSquared;
 
 		long start = System.currentTimeMillis();
-		long start_tot = System.currentTimeMillis();
 		do
 		{
 
@@ -176,7 +175,6 @@ public class AKS extends Thread
 
 		end = System.nanoTime();
 		resultTime = (end - start)/1000000;
-		System.out.println("\nEl resultado del Paso 3 en tiempo es: " + resultTime + " ms.");
 		try {
 			FileWriter archivo = new FileWriter("pruebas.txt", true);
 			archivo.write("\nEl resultado del Paso 3 en tiempo es: " + resultTime + " ms para el n�mero: " + n);
@@ -223,15 +221,6 @@ public class AKS extends Thread
 				} catch (IOException e) {
 					throw new RuntimeException(e);
 				}
-				long end_tot = System.currentTimeMillis();
-				long resultTime_tot = (end_tot - start_tot);
-				try {
-					FileWriter archivo = new FileWriter("pruebas.txt", true);
-					archivo.write("\nEl resultado del programa tiempo es: " + resultTime_tot + " ms para el n�mero: " + n+"\n\n");
-					archivo.close();
-				} catch (IOException e) {
-					throw new RuntimeException(e);
-				}
 				return n_isprime;
 			}
 			else
@@ -247,15 +236,6 @@ public class AKS extends Thread
 			throw new RuntimeException(e);
 		}
 		n_isprime = true;
-		long end_tot = System.currentTimeMillis();
-		long resultTime_tot = (end_tot - start_tot);
-		try {
-			FileWriter archivo = new FileWriter("pruebas.txt", true);
-			archivo.write("\nEl resultado del programa tiempo es: " + resultTime_tot + " ms para el n�mero: " + n+"\n\n");
-			archivo.close();
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
 	    return n_isprime;
 	}
 
