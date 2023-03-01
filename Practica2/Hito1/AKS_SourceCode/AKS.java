@@ -92,7 +92,13 @@ public class AKS extends Thread
 
 				long end = System.currentTimeMillis();
 				long resultTime = end - start;
-				System.out.println("\nEl resultado en tiempo es: " + resultTime + " ms.");
+				try {
+					FileWriter archivo = new FileWriter("pruebas.txt", true);
+					archivo.write("\nEl resultado del Paso 1 en tiempo es: " + resultTime + " ms para el nï¿½mero: " + n);
+					archivo.close();
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
 				return false;
 			}
 			
@@ -102,11 +108,12 @@ public class AKS extends Thread
 			aSquared = base.pow(2);
 		}
 		while (aSquared.compareTo(this.n) <= 0);
+
 		long end = System.currentTimeMillis();
 		long resultTime = end - start;
 		try {
 			FileWriter archivo = new FileWriter("pruebas.txt", true);
-			archivo.write("\nEl resultado del Paso 1 en tiempo es: " + resultTime + " ms para el número: " + n);
+			archivo.write("\nEl resultado del Paso 1 en tiempo es: " + resultTime + " ms para el nï¿½mero: " + n);
 			archivo.close();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
@@ -135,15 +142,14 @@ public class AKS extends Thread
 
 		end = System.currentTimeMillis();
 		resultTime = end - start;
-		System.out.println("\nEl resultado del Paso 2 en tiempo es: " + resultTime + " ms.");
 		try {
 			FileWriter archivo = new FileWriter("pruebas.txt", true);
-			archivo.write("\nEl resultado del Paso 2 en tiempo es: " + resultTime + " ms para el número: " + n);
+			archivo.write("\nEl resultado del Paso 2 en tiempo es: " + resultTime + " ms para el nï¿½mero: " + n);
 			archivo.close();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-		start = System.currentTimeMillis();
+		start = System.nanoTime();
 		
 		// If 1 < gcd(a,n) < n for some a <= r, output COMPOSITE
 		for( BigInteger i = BigInteger.valueOf(2); i.compareTo(r) <= 0; i = i.add(BigInteger.ONE) )
@@ -154,16 +160,26 @@ public class AKS extends Thread
 			{
 				factor = i;
 				n_isprime = false;
+				end = System.nanoTime();
+				resultTime = (end - start)/1000000;
+				System.out.println("\nEl resultado del Paso 3 en tiempo es: " + resultTime + " ms.");
+				try {
+					FileWriter archivo = new FileWriter("pruebas.txt", true);
+					archivo.write("\nEl resultado del Paso 3 en tiempo es: " + resultTime + " ms para el nï¿½mero: " + n);
+					archivo.close();
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
 				return false;
 			}
 		}
 
-		end = System.currentTimeMillis();
-		resultTime = end - start;
+		end = System.nanoTime();
+		resultTime = (end - start)/1000000;
 		System.out.println("\nEl resultado del Paso 3 en tiempo es: " + resultTime + " ms.");
 		try {
 			FileWriter archivo = new FileWriter("pruebas.txt", true);
-			archivo.write("\nEl resultado del Paso 3 en tiempo es: " + resultTime + " ms para el número: " + n);
+			archivo.write("\nEl resultado del Paso 3 en tiempo es: " + resultTime + " ms para el nï¿½mero: " + n);
 			archivo.close();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
@@ -177,7 +193,7 @@ public class AKS extends Thread
 
 		
 		// For i = 1 to sqrt(totient)log(n) do
-		// if (X+i)^n <> X^n + i (mod X^r - 1,n), output composite;
+		// if (X+i)^n <>ï¿½X^n + i (mod X^r - 1,n), output composite;
 		start = System.currentTimeMillis();
 		// sqrt(totient)log(n)
 		int limit = (int) (Math.sqrt(totient(r).doubleValue()) * this.log());
@@ -198,6 +214,24 @@ public class AKS extends Thread
 				// if (verbose) System.out.println("(x+i)^" + n + " = x^" + n + " + " + i + " (mod x^" + r + " - 1, " + n + ") failed");
 				factor = BigInteger.valueOf(i);
 				n_isprime = false;
+				end = System.currentTimeMillis();
+				resultTime = end - start;
+				try {
+					FileWriter archivo = new FileWriter("pruebas.txt", true);
+					archivo.write("\nEl resultado del Paso 5 en tiempo es: " + resultTime + " ms para el nï¿½mero: " + n);
+					archivo.close();
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+				long end_tot = System.currentTimeMillis();
+				long resultTime_tot = (end_tot - start_tot);
+				try {
+					FileWriter archivo = new FileWriter("pruebas.txt", true);
+					archivo.write("\nEl resultado del programa tiempo es: " + resultTime_tot + " ms para el nï¿½mero: " + n+"\n\n");
+					archivo.close();
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
 				return n_isprime;
 			}
 			else
@@ -207,17 +241,17 @@ public class AKS extends Thread
 		resultTime = end - start;
 		try {
 			FileWriter archivo = new FileWriter("pruebas.txt", true);
-			archivo.write("\nEl resultado del Paso 5 en tiempo es: " + resultTime + " ms para el número: " + n);
+			archivo.write("\nEl resultado del Paso 5 en tiempo es: " + resultTime + " ms para el nï¿½mero: " + n);
 			archivo.close();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 		n_isprime = true;
 		long end_tot = System.currentTimeMillis();
-		long resultTime_tot = (end_tot - start_tot)/60000;
+		long resultTime_tot = (end_tot - start_tot);
 		try {
 			FileWriter archivo = new FileWriter("pruebas.txt", true);
-			archivo.write("\nEl resultado del programa tiempo es: " + resultTime_tot + " min para el número: " + n+"\n\n");
+			archivo.write("\nEl resultado del programa tiempo es: " + resultTime_tot + " ms para el nï¿½mero: " + n+"\n\n");
 			archivo.close();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
