@@ -14,7 +14,7 @@ public class Scratch {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ArrayList <String> listaPrimos = new ArrayList<String>();
-		listaPrimos.add("776159");
+		/*listaPrimos.add("776159");
 		listaPrimos.add("776161");
 		listaPrimos.add("98982599");
 		listaPrimos.add("98982601");
@@ -25,7 +25,7 @@ public class Scratch {
 		listaPrimos.add("99996460031327");
 		listaPrimos.add("99996460031329");
 		listaPrimos.add("9999940600088207");
-		listaPrimos.add("9999940600088209");
+		listaPrimos.add("9999940600088209");*/
 		listaPrimos.add("999999594000041207");
 		listaPrimos.add("999999594000041209");
 		listaPrimos.add("4611685283988009527");

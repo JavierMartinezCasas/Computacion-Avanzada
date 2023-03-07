@@ -67,27 +67,28 @@ public class AKS extends Thread
 		BigInteger aSquared;
 
 		long start = System.currentTimeMillis();
+		// TODO: PASO 1
 		do
 		{
 
-			BigInteger result;
+			BigInteger result; // 1
 
-			int power = Math.max((int) (log()/log(base) - 2),1);
-			int comparison;
-			
+			int power = Math.max((int) (log()/log(base) - 2),1); // 4
+			int comparison; // 1
+			//
 			do
 			{
 				power++;
 				result = base.pow(power);
 				comparison = n.compareTo(result);
 			}
-			while( comparison > 0 && power < Integer.MAX_VALUE );
-			
-			if( comparison == 0 )
+			while( comparison > 0 && power < Integer.MAX_VALUE ); // C + n(C + S) --> 2 + 8n
+			//
+			if( comparison == 0 ) // 1
 			{
-				if (verbose) System.out.println(n + " is a perfect power of " + base);
-				factor = base;
-				n_isprime = false;
+				if (verbose) System.out.println(n + " is a perfect power of " + base); // 1
+				factor = base; // 1
+				n_isprime = false; // 1
 
 				long end = System.currentTimeMillis();
 				long resultTime = end - start;
@@ -98,15 +99,15 @@ public class AKS extends Thread
 				} catch (IOException e) {
 					throw new RuntimeException(e);
 				}
-				return false;
+				return false; // 1
 			}
 			
-			if (verbose) System.out.println(n + " is not a perfect power of " + base);
+			if (verbose) System.out.println(n + " is not a perfect power of " + base); // 2
 
-			base = base.add(BigInteger.ONE);
-			aSquared = base.pow(2);
+			base = base.add(BigInteger.ONE); // 2
+			aSquared = base.pow(2); // 2
 		}
-		while (aSquared.compareTo(this.n) <= 0);
+		while (aSquared.compareTo(this.n) <= 0); // C + n(C + S) --> 1 + n(20+8n) --> 1 + 20n + 8n^2
 
 		long end = System.currentTimeMillis();
 		long resultTime = end - start;
@@ -124,19 +125,20 @@ public class AKS extends Thread
 		// o_r(n) is the multiplicative order of n modulo r
 		// the multiplicative order of n modulo r is the 
 		// smallest positive integer k with	n^k = 1 (mod r).
+		// TODO: Paso 2
 		start = System.currentTimeMillis();
 
-		double log = this.log();
-		double logSquared = log*log;
-		BigInteger k = BigInteger.ONE;
-		BigInteger r = BigInteger.ONE;
+		double log = this.log();  // 1
+		double logSquared = log*log; // 2
+		BigInteger k = BigInteger.ONE; // 2
+		BigInteger r = BigInteger.ONE; // 2
 		do
 		{
-			r = r.add(BigInteger.ONE);
-			if (verbose) System.out.println("trying r = " + r);
-			k = multiplicativeOrder(r);
+			r = r.add(BigInteger.ONE); // 2
+			if (verbose) System.out.println("trying r = " + r); // 3
+			k = multiplicativeOrder(r); // 2
 		}
-		while( k.doubleValue() < logSquared );
+		while( k.doubleValue() < logSquared ); // C + n(C + S) --> 2 + n(2 + 7) -->  2 + 9n
 		if (verbose) System.out.println("r is " + r);
 
 		end = System.currentTimeMillis();
@@ -148,17 +150,19 @@ public class AKS extends Thread
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+		// TODO: Paso 3
 		start = System.nanoTime();
 		
 		// If 1 < gcd(a,n) < n for some a <= r, output COMPOSITE
-		for( BigInteger i = BigInteger.valueOf(2); i.compareTo(r) <= 0; i = i.add(BigInteger.ONE) )
+		for( BigInteger i = BigInteger.valueOf(2); i.compareTo(r) <= 0; i = i.add(BigInteger.ONE) ) // A + C + n(C + B + S)
+			// 2 + 2 + n(2 + 3 + 13) --> 4 + 18n
 		{
-			BigInteger gcd = n.gcd(i);
-			if (verbose) System.out.println("gcd(" + n + "," + i + ") = " + gcd);
-			if ( gcd.compareTo(BigInteger.ONE) > 0 && gcd.compareTo(n) < 0 )
+			BigInteger gcd = n.gcd(i); // 2
+			if (verbose) System.out.println("gcd(" + n + "," + i + ") = " + gcd); // 3
+			if ( gcd.compareTo(BigInteger.ONE) > 0 && gcd.compareTo(n) < 0 ) // 5
 			{
-				factor = i;
-				n_isprime = false;
+				factor = i; // 1
+				n_isprime = false; // 1
 				end = System.nanoTime();
 				resultTime = (end - start)/1000000;
 				System.out.println("\nEl resultado del Paso 3 en tiempo es: " + resultTime + " ms.");
@@ -169,7 +173,7 @@ public class AKS extends Thread
 				} catch (IOException e) {
 					throw new RuntimeException(e);
 				}
-				return false;
+				return false; // 1
 			}
 		}
 
