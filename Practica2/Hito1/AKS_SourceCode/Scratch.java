@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
+import static jdk.vm.ci.code.CodeUtil.log2;
+
 
 public class Scratch {
 
@@ -13,8 +15,8 @@ public class Scratch {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ArrayList <String> listaPrimos = new ArrayList<String>();
-		/*listaPrimos.add("776159");
+		/*ArrayList <String> listaPrimos = new ArrayList<String>();
+		listaPrimos.add("776159");
 		listaPrimos.add("776161");
 		listaPrimos.add("98982599");
 		listaPrimos.add("98982601");
@@ -25,18 +27,25 @@ public class Scratch {
 		listaPrimos.add("99996460031327");
 		listaPrimos.add("99996460031329");
 		listaPrimos.add("9999940600088207");
-		listaPrimos.add("9999940600088209");*/
+		listaPrimos.add("9999940600088209");
 		listaPrimos.add("999999594000041207");
 		listaPrimos.add("999999594000041209");
 		listaPrimos.add("4611685283988009527");
 		listaPrimos.add("4611685283988009529");
 		listaPrimos.add("9223371593598182327");
-		listaPrimos.add("9223371593598182329");
+		listaPrimos.add("9223371593598182329");*/
+//i< listaPrimos.size()
+		int digitos = 6;
+		int bit_l;
 
-		for (int i = 0; i< listaPrimos.size() ;i++){
+		for (int i = 0; i < 100 ;i++){
 			long start = System.currentTimeMillis();
-			BigInteger n = new BigInteger(listaPrimos.get(i));
-			// BigInteger n = BigInteger.probablePrime(64, new SecureRandom());
+			//BigInteger n = new BigInteger(listaPrimos.get(i));
+			if (i % 10 == 0) {
+				digitos += 2;
+			}
+			bit_l = digitos * log2(10);
+			BigInteger n = BigInteger.probablePrime(bit_l, new SecureRandom());
 			System.out.println(n);
 			AKS.verbose = false;
 			new AKS(n).isPrime();

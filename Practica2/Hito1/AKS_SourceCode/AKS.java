@@ -107,7 +107,7 @@ public class AKS extends Thread
 			base = base.add(BigInteger.ONE); // 2
 			aSquared = base.pow(2); // 2
 		}
-		while (aSquared.compareTo(this.n) <= 0); // C + n(C + S) --> 1 + n(20+8n) --> 1 + 20n + 8n^2
+		while (aSquared.compareTo(this.n) <= 0); // C + n(C + S) --> 1 + n(20+8n) --> 1 + 20n + 8n^2  || 1 + k(20+8n) --> 1 + 20k + 8kn
 
 		long end = System.currentTimeMillis();
 		long resultTime = end - start;
