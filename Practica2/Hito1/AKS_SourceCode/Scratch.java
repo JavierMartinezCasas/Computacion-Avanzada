@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
-import static jdk.vm.ci.code.CodeUtil.log2;
 
 
 public class Scratch {
@@ -35,8 +34,9 @@ public class Scratch {
 		listaPrimos.add("9223371593598182327");
 		listaPrimos.add("9223371593598182329");*/
 //i< listaPrimos.size()
-		int digitos = 6;
-		int bit_l;
+		int digitos = 4; // poner dos de menos
+		double bit_l;
+		double log_2de10 = Math.log(10)/Math.log(2);
 
 		for (int i = 0; i < 100 ;i++){
 			long start = System.currentTimeMillis();
@@ -44,8 +44,10 @@ public class Scratch {
 			if (i % 10 == 0) {
 				digitos += 2;
 			}
-			bit_l = digitos * log2(10);
-			BigInteger n = BigInteger.probablePrime(bit_l, new SecureRandom());
+			bit_l = digitos * log_2de10;
+			int intValue = (int) bit_l;
+
+			BigInteger n = BigInteger.probablePrime(intValue, new SecureRandom());
 			System.out.println(n);
 			AKS.verbose = false;
 			new AKS(n).isPrime();

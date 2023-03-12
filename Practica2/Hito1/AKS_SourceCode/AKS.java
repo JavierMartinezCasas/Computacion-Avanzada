@@ -81,9 +81,9 @@ public class AKS extends Thread
 				power++;
 				result = base.pow(power);
 				comparison = n.compareTo(result);
+
 			}
 			while( comparison > 0 && power < Integer.MAX_VALUE ); // C + n(C + S) --> 2 + 8n
-			//
 			if( comparison == 0 ) // 1
 			{
 				if (verbose) System.out.println(n + " is a perfect power of " + base); // 1
@@ -164,11 +164,11 @@ public class AKS extends Thread
 				factor = i; // 1
 				n_isprime = false; // 1
 				end = System.nanoTime();
-				resultTime = (end - start)/1000000;
-				System.out.println("\nEl resultado del Paso 3 en tiempo es: " + resultTime + " ms.");
+				resultTime = (end - start);
+				System.out.println("\nEl resultado del Paso 3 en tiempo es: " + resultTime + " ns.");
 				try {
 					FileWriter archivo = new FileWriter("pruebas.txt", true);
-					archivo.write("\nEl resultado del Paso 3 en tiempo es: " + resultTime + " ms para el n�mero: " + n);
+					archivo.write("\nEl resultado del Paso 3 en tiempo es: " + resultTime + " ns para el n�mero: " + n);
 					archivo.close();
 				} catch (IOException e) {
 					throw new RuntimeException(e);
@@ -178,10 +178,10 @@ public class AKS extends Thread
 		}
 
 		end = System.nanoTime();
-		resultTime = (end - start)/1000000;
+		resultTime = (end - start);
 		try {
 			FileWriter archivo = new FileWriter("pruebas.txt", true);
-			archivo.write("\nEl resultado del Paso 3 en tiempo es: " + resultTime + " ms para el n�mero: " + n);
+			archivo.write("\nEl resultado del Paso 3 en tiempo es: " + resultTime + " ns para el n�mero: " + n);
 			archivo.close();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
@@ -196,6 +196,8 @@ public class AKS extends Thread
 		
 		// For i = 1 to sqrt(totient)log(n) do
 		// if (X+i)^n <>�X^n + i (mod X^r - 1,n), output composite;
+		// TODO: Paso 5
+
 		start = System.currentTimeMillis();
 		// sqrt(totient)log(n)
 		int limit = (int) (Math.sqrt(totient(r).doubleValue()) * this.log());
@@ -203,8 +205,10 @@ public class AKS extends Thread
 		Poly modPoly = new Poly(BigInteger.ONE, r.intValue()).minus(new Poly(BigInteger.ONE,0));
 		// X^n (mod X^r - 1, n)
 		Poly partialOutcome = new Poly(BigInteger.ONE, 1).modPow(n, modPoly, n);
-		for( int i = 1; i <= limit; i++ )
+		/*for( int i = 1; i <= limit; i++ )
 		{
+
+
 			Poly polyI = new Poly(BigInteger.valueOf(i),0);
 			// X^n + i (mod X^r - 1, n)
 			Poly outcome = partialOutcome.plus(polyI);
@@ -238,7 +242,7 @@ public class AKS extends Thread
 			archivo.close();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
-		}
+		}*/
 		n_isprime = true;
 	    return n_isprime;
 	}
