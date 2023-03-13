@@ -205,7 +205,7 @@ public class AKS extends Thread
 		Poly modPoly = new Poly(BigInteger.ONE, r.intValue()).minus(new Poly(BigInteger.ONE,0));
 		// X^n (mod X^r - 1, n)
 		Poly partialOutcome = new Poly(BigInteger.ONE, 1).modPow(n, modPoly, n);
-		/*for( int i = 1; i <= limit; i++ )
+		for( int i = 1; i <= limit; i++ )
 		{
 
 
@@ -238,11 +238,11 @@ public class AKS extends Thread
 		resultTime = end - start;
 		try {
 			FileWriter archivo = new FileWriter("pruebas.txt", true);
-			archivo.write("\nEl resultado del Paso 5 en tiempo es: " + resultTime + " ms para el n�mero: " + n);
+			archivo.write("\n" + n +" "+ resultTime );
 			archivo.close();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
-		}*/
+		}
 		n_isprime = true;
 	    return n_isprime;
 	}

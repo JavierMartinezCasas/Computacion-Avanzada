@@ -34,7 +34,7 @@ public class Scratch {
 		listaPrimos.add("9223371593598182327");
 		listaPrimos.add("9223371593598182329");*/
 //i< listaPrimos.size()
-		int digitos = 4; // poner dos de menos
+		int digitos = 5; // poner dos de menos
 		double bit_l;
 		double log_2de10 = Math.log(10)/Math.log(2);
 
@@ -42,7 +42,7 @@ public class Scratch {
 			long start = System.currentTimeMillis();
 			//BigInteger n = new BigInteger(listaPrimos.get(i));
 			if (i % 10 == 0) {
-				digitos += 2;
+				digitos += 1;
 			}
 			bit_l = digitos * log_2de10;
 			int intValue = (int) bit_l;
@@ -55,7 +55,7 @@ public class Scratch {
 			long time = end - start;
 			try {
 				FileWriter archivo = new FileWriter("pruebas.txt", true);
-				archivo.write("\nEl resultado del programa total en tiempo es: " + time + " ms para el n�mero: " + n+"\n\n");
+				archivo.write("\n" + n+" "+ time +"\n\n");
 				archivo.close();
 			} catch (IOException e) {
 				throw new RuntimeException(e);
