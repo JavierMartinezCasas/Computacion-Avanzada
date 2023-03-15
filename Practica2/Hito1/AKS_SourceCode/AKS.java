@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * 
+ *
  */
 
 /**
@@ -18,7 +18,7 @@ public class AKS extends Thread
 {
 
 	static boolean verbose = false;
-	
+
 	BigInteger n;
 	boolean n_isprime;
 	BigInteger factor;
@@ -32,34 +32,34 @@ public class AKS extends Thread
 	{
 		this.n = n;
 	}
-	
+
 	/***
 	 * Run AKS.isprime as a thread
 	 */
 	public void run()
 	{
-	  this.isPrime();
+		this.isPrime();
 	}
-	
+
 	/***
 	 * Run the AKS primality test and time it
-	 * 
+	 *
 	 * @return true if n is prime
 	 */
 	public boolean isPrimeTimed()
-  {
-    double start = System.currentTimeMillis();
-    boolean rtn = isPrime();
-    timeelapsed = System.currentTimeMillis() - start;
-    return rtn;
-  }
-	
+	{
+		double start = System.currentTimeMillis();
+		boolean rtn = isPrime();
+		timeelapsed = System.currentTimeMillis() - start;
+		return rtn;
+	}
+
 	/***
 	 * Run the AKS primality test
-	 * 
+	 *
 	 * @return true if n is prime
 	 */
-	public boolean isPrime() 
+	public boolean isPrime()
 	{
 		// TODO: Do this in linear time http://www.ams.org/journals/mcom/1998-67-223/S0025-5718-98-00952-1/S0025-5718-98-00952-1.pdf
 		// If ( n = a^b for a in natural numbers and b > 1), output COMPOSITE
@@ -93,15 +93,15 @@ public class AKS extends Thread
 				long end = System.currentTimeMillis();
 				long resultTime = end - start;
 				try {
-					FileWriter archivo = new FileWriter("pruebas.txt", true);
-					archivo.write("\nEl resultado del Paso 1 en tiempo es: " + resultTime + " ms para el n�mero: " + n);
+					FileWriter archivo = new FileWriter("paso1.txt", true);
+					archivo.write("\n " + resultTime);
 					archivo.close();
 				} catch (IOException e) {
 					throw new RuntimeException(e);
 				}
 				return false; // 1
 			}
-			
+
 			if (verbose) System.out.println(n + " is not a perfect power of " + base); // 2
 
 			base = base.add(BigInteger.ONE); // 2
@@ -112,18 +112,28 @@ public class AKS extends Thread
 		long end = System.currentTimeMillis();
 		long resultTime = end - start;
 		try {
-			FileWriter archivo = new FileWriter("pruebas.txt", true);
-			archivo.write("\nEl resultado del Paso 1 en tiempo es: " + resultTime + " ms para el n�mero: " + n);
+			FileWriter archivo = new FileWriter("paso1.txt", true);
+			archivo.write("\n " + resultTime);
 			archivo.close();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+
+		try {
+			FileWriter archivo = new FileWriter("num.txt", true);
+			archivo.write("\n " + n);
+			archivo.close();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+
+
 		if (verbose) System.out.println(n + " is not a perfect power of any integer less than its square root");
 
 
 		// Find the smallest r such that o_r(n) > log^2 n
 		// o_r(n) is the multiplicative order of n modulo r
-		// the multiplicative order of n modulo r is the 
+		// the multiplicative order of n modulo r is the
 		// smallest positive integer k with	n^k = 1 (mod r).
 		// TODO: Paso 2
 		start = System.currentTimeMillis();
@@ -144,18 +154,18 @@ public class AKS extends Thread
 		end = System.currentTimeMillis();
 		resultTime = end - start;
 		try {
-			FileWriter archivo = new FileWriter("pruebas.txt", true);
-			archivo.write("\nEl resultado del Paso 2 en tiempo es: " + resultTime + " ms para el n�mero: " + n);
+			FileWriter archivo = new FileWriter("paso2.txt", true);
+			archivo.write("\n " + resultTime);
 			archivo.close();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 		// TODO: Paso 3
 		start = System.nanoTime();
-		
+
 		// If 1 < gcd(a,n) < n for some a <= r, output COMPOSITE
 		for( BigInteger i = BigInteger.valueOf(2); i.compareTo(r) <= 0; i = i.add(BigInteger.ONE) ) // A + C + n(C + B + S)
-			// 2 + 2 + n(2 + 3 + 13) --> 4 + 18n
+		// 2 + 2 + n(2 + 3 + 13) --> 4 + 18n
 		{
 			BigInteger gcd = n.gcd(i); // 2
 			if (verbose) System.out.println("gcd(" + n + "," + i + ") = " + gcd); // 3
@@ -167,8 +177,8 @@ public class AKS extends Thread
 				resultTime = (end - start);
 				System.out.println("\nEl resultado del Paso 3 en tiempo es: " + resultTime + " ns.");
 				try {
-					FileWriter archivo = new FileWriter("pruebas.txt", true);
-					archivo.write("\nEl resultado del Paso 3 en tiempo es: " + resultTime + " ns para el n�mero: " + n);
+					FileWriter archivo = new FileWriter("paso3.txt", true);
+					archivo.write("\n " + resultTime);
 					archivo.close();
 				} catch (IOException e) {
 					throw new RuntimeException(e);
@@ -180,8 +190,8 @@ public class AKS extends Thread
 		end = System.nanoTime();
 		resultTime = (end - start);
 		try {
-			FileWriter archivo = new FileWriter("pruebas.txt", true);
-			archivo.write("\nEl resultado del Paso 3 en tiempo es: " + resultTime + " ns para el n�mero: " + n);
+			FileWriter archivo = new FileWriter("paso3.txt", true);
+			archivo.write("\n " + resultTime);
 			archivo.close();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
@@ -193,7 +203,7 @@ public class AKS extends Thread
 			return true;
 		}
 
-		
+
 		// For i = 1 to sqrt(totient)log(n) do
 		// if (X+i)^n <>�X^n + i (mod X^r - 1,n), output composite;
 		// TODO: Paso 5
@@ -205,7 +215,7 @@ public class AKS extends Thread
 		Poly modPoly = new Poly(BigInteger.ONE, r.intValue()).minus(new Poly(BigInteger.ONE,0));
 		// X^n (mod X^r - 1, n)
 		Poly partialOutcome = new Poly(BigInteger.ONE, 1).modPow(n, modPoly, n);
-		for( int i = 1; i <= limit; i++ )
+		/*for( int i = 1; i <= limit; i++ )
 		{
 
 
@@ -238,50 +248,50 @@ public class AKS extends Thread
 		resultTime = end - start;
 		try {
 			FileWriter archivo = new FileWriter("pruebas.txt", true);
-			archivo.write("\n" + n +" "+ resultTime );
+			archivo.write("\nEl resultado del Paso 5 en tiempo es: " + resultTime + " ms para el n�mero: " + n);
 			archivo.close();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
-		}
+		}*/
 		n_isprime = true;
-	    return n_isprime;
+		return n_isprime;
 	}
 
-	
+
 	/***
 	 * Calculate the totient of a BigInteger r
 	 * Based on this algorithm:
-	 * 
+	 *
 	 * http://community.topcoder.com/tc?module=Static&d1=tutorials&d2=primeNumbers
-	 * 
+	 *
 	 * @param r BigInteger to calculate the totient of
 	 * @return phi(r)--number of integers less than r that are coprime
 	 */
-    BigInteger totient(BigInteger n) 
-    { 
-    	BigInteger result = n; 
-      
-    	for( BigInteger i = BigInteger.valueOf(2); n.compareTo(i.multiply(i)) > 0; i = i.add(BigInteger.ONE) ) 
-    	{ 
-    		if (n.mod(i).compareTo(BigInteger.ZERO) == 0) 
-    			result = result.subtract(result.divide(i));
-    		
-    		while (n.mod(i).compareTo(BigInteger.ZERO) == 0)
-    			n = n.divide(i); 
-    	}
-    	
-    	if (n.compareTo(BigInteger.ONE) > 0) 
-    		result = result.subtract(result.divide(n));
-    	
-    	return result;
-    	
-    } 
+	BigInteger totient(BigInteger n)
+	{
+		BigInteger result = n;
+
+		for( BigInteger i = BigInteger.valueOf(2); n.compareTo(i.multiply(i)) > 0; i = i.add(BigInteger.ONE) )
+		{
+			if (n.mod(i).compareTo(BigInteger.ZERO) == 0)
+				result = result.subtract(result.divide(i));
+
+			while (n.mod(i).compareTo(BigInteger.ZERO) == 0)
+				n = n.divide(i);
+		}
+
+		if (n.compareTo(BigInteger.ONE) > 0)
+			result = result.subtract(result.divide(n));
+
+		return result;
+
+	}
 
 	/***
 	 * Calculate the multiplicative order of n modulo r
-	 * This is defined as the smallest positive integer k 
+	 * This is defined as the smallest positive integer k
 	 * for which n^k = 1 (mod r).
-	 * 
+	 *
 	 * @param r modulus for mutliplicative order
 	 * @return multiplicative order or -1 if none exists
 	 */
@@ -290,14 +300,14 @@ public class AKS extends Thread
 		// TODO Consider implementing an alternative algorithm http://rosettacode.org/wiki/Multiplicative_order
 		BigInteger k = BigInteger.ZERO;
 		BigInteger result;
-		
+
 		do
 		{
 			k = k.add(BigInteger.ONE);
 			result = this.n.modPow(k,r);
 		}
 		while( result.compareTo(BigInteger.ONE) != 0 && r.compareTo(k) > 0);
-		
+
 		if (r.compareTo(k) <= 0)
 			return BigInteger.ONE.negate();
 		else
@@ -306,36 +316,36 @@ public class AKS extends Thread
 			return k;
 		}
 	}
-	
+
 
 	// Save log n here
 	double logSave = -1;
 
 	/***
-	 * 
+	 *
 	 * @return log base 2 of n
 	 */
 	double log()
 	{
 		if ( logSave != -1 )
 			return logSave;
-		
+
 		// from http://world.std.com/~reinhold/BigNumCalcSource/BigNumCalc.java
 		BigInteger b;
-		
-	    int temp = n.bitLength() - 1000;
-	    if (temp > 0) 
-	    {
-	    	b=n.shiftRight(temp); 
-	        logSave = (Math.log(b.doubleValue()) + temp)*Math.log(2);
-	    }
-	    else 
-	    	logSave = (Math.log(n.doubleValue()))*Math.log(2);
 
-	    return logSave;
+		int temp = n.bitLength() - 1000;
+		if (temp > 0)
+		{
+			b=n.shiftRight(temp);
+			logSave = (Math.log(b.doubleValue()) + temp)*Math.log(2);
+		}
+		else
+			logSave = (Math.log(n.doubleValue()))*Math.log(2);
+
+		return logSave;
 	}
 
-	
+
 	/**
 	 * log base 2 method that takes a parameter
 	 * @param x
@@ -345,24 +355,24 @@ public class AKS extends Thread
 	{
 		// from http://world.std.com/~reinhold/BigNumCalcSource/BigNumCalc.java
 		BigInteger b;
-		
-	    int temp = x.bitLength() - 1000;
-	    if (temp > 0) 
-	    {
-	    	b=x.shiftRight(temp); 
-	        return (Math.log(b.doubleValue()) + temp)*Math.log(2);
-	    }
-	    else 
-	    	return (Math.log(x.doubleValue())*Math.log(2));
+
+		int temp = x.bitLength() - 1000;
+		if (temp > 0)
+		{
+			b=x.shiftRight(temp);
+			return (Math.log(b.doubleValue()) + temp)*Math.log(2);
+		}
+		else
+			return (Math.log(x.doubleValue())*Math.log(2));
 	}
-	
+
 	public BigInteger getFactor()
 	{
 		return factor;
 	}
 
-  public double GetElapsedTime() {
-    return timeelapsed;
-  }
-	
+	public double GetElapsedTime() {
+		return timeelapsed;
+	}
+
 }
